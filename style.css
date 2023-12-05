@@ -71,7 +71,18 @@ h6 {
   font-family: "Josefin Sans", sans-serif;
   font-size: 0.9rem;
   cursor: pointer;
-  transition: all 0.2 s;
+  transition: all 0.2s;
+}
+
+.btn_centred {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.btn_add {
+  margin-bottom: 1rem;
 }
 
 .btn_purple {

@@ -1,6 +1,7 @@
 "use strict";
 
-import cardMaker from "./component/CardMaker";
+import cardMaker from "./component/bookCardMaker";
+import createButton from "./component/createButton";
 
 const myLibrary = [
   { author: "George Orwell", title: "1984", pages: 315, isRead: true },
@@ -37,13 +38,17 @@ function Book(author, title, pages, isRead) {
   this.isRead = isRead;
 }
 
-function addBookToTheLibrary() {
-  // do stuff here
-}
+function addBookToTheLibrary() {}
 
 // Add content to page
 const libraryEl = document.querySelector(".library");
+const addBookBtn = createButton(
+  `${myLibrary.length === 0 ? "btn_centred" : "btn_add"}`,
+  "Add new book",
+  addBookToTheLibrary
+);
 
+libraryEl.appendChild(addBookBtn);
 myLibrary.forEach((element) => {
   libraryEl.appendChild(cardMaker(element));
 });

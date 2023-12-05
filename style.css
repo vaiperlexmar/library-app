@@ -1,7 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600&family=Lato:wght@400;700&family=Playfair+Display:wght@400;500;600&family=Playfair:opsz,wght@5..1200,400;5..1200,600&display=swap");
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+body {
+  font-family: "Playfair", serif;
+  font-size: 62.5%;
+  text-align: center;
+  background-color: #fedc56;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Josefin Sans", sans-serif;
+}
+
+/* Header */
+
+.header {
+  height: 3vh;
+}
+
+/* Library styling  */
+
+.library__heading {
+  font-size: 2.4rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Book card styling */
+
+.book {
+  background-color: rgba(255, 255, 255, 0.7);
+  width: 80%;
+  margin: 0 auto 2rem;
+  padding: 2rem;
+  border-radius: 0.25rem;
+}
+
+.book__title {
+  font-size: 2rem;
+}
+
+.book__author {
+  font-size: 1.5rem;
+  font-family: "Playfair", sans-serif;
+}
+
+.book__pages {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn {
+  display: block;
+  margin: 0 auto;
+  padding: 0.75rem 0;
+  width: 75%;
+  border: 0;
+  border-radius: 0.5rem;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2 s;
+}
+
+.btn_purple {
+  background-color: #594ab0;
+  color: #fff;
+}
+
+.btn_purple:hover {
+  background-color: #887ad7;
+}
+
+.btn_red {
+  background-color: #b03c3c;
+  color: #fff;
+}
+
+.btn_red:hover {
+  background-color: #d86d6d;
+}
+
+.book__is-read-btn {
+  margin-bottom: 1rem;
 }

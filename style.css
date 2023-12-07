@@ -133,7 +133,7 @@ h6 {
 
 .modal__window {
   max-width: 50rem;
-  padding: 3rem 4rem;
+  padding: 3rem;
   z-index: 1;
   background-color: #fedc56;
   margin: 3rem 1.5rem;

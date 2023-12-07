@@ -56,7 +56,9 @@ function addBookToTheLibrary() {
     const title = modalForm[1].value;
     const pages = modalForm[2].value;
     const isRead = modalForm[3].checked;
-    myLibrary.push(new Book(author, title, pages, isRead));
+    const newBook = new Book(author, title, pages, isRead);
+    myLibrary.push(newBook);
+    libraryEl.appendChild(cardMaker(newBook));
     document.body.classList.remove("modal-open");
     newBookModal.classList.add("hidden");
   });
@@ -69,6 +71,7 @@ const addBookBtn = createButton(
   "Add new book",
   addBookToTheLibrary
 );
+addBookBtn.classList.add("btn_purple");
 
 libraryEl.appendChild(addBookBtn);
 myLibrary.forEach((element) => {

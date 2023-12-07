@@ -77,3 +77,16 @@ libraryEl.appendChild(addBookBtn);
 myLibrary.forEach((element) => {
   libraryEl.appendChild(cardMaker(element));
 });
+
+// Remove book from array
+
+document.addEventListener("bookremoved", (event) => {
+  const removedBookTitle = event.detail.bookTitle;
+
+  const index = myLibrary.findIndex((book) => book.title === removedBookTitle);
+  if (index !== -1) {
+    myLibrary.splice(index, 1);
+    console.log(myLibrary[index]);
+    console.log(myLibrary);
+  }
+});

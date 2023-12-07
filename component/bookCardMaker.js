@@ -29,6 +29,16 @@ function bookCardMaker(book) {
   });
   const bookRemoveBtn = createButton("book__remove-btn");
 
+  // Remove book feature
+  bookRemoveBtn.addEventListener("click", () => {
+    cardBlock.remove();
+
+    const event = new CustomEvent("bookremoved", {
+      detail: { bookTitle: book.title },
+    });
+    document.dispatchEvent(event);
+  });
+
   // Add styling class
   bookTitle.classList.add("book__title");
   bookAuthor.classList.add("book__author");

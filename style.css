@@ -24,6 +24,12 @@ h6 {
   font-family: "Josefin Sans", sans-serif;
 }
 
+.hidden {
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+}
+
 /* Header */
 
 .header {
@@ -105,4 +111,75 @@ h6 {
 
 .book__is-read-btn {
   margin-bottom: 1rem;
+}
+
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+.modal-open {
+  overflow: hidden;
+}
+
+.modal__window {
+  max-width: 50rem;
+  padding: 3rem 4rem;
+  z-index: 1;
+  background-color: #fedc56;
+  margin: 3rem 1.5rem;
+  border-radius: 1rem;
+}
+
+.modal__header {
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
+  gap: 0;
+  align-items: center;
+  justify-content: center;
+
+  font-size: large;
+  margin-bottom: 1.5rem;
+}
+
+.modal__header > button {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  transition: 0.2s all;
+}
+
+.modal__header > button:hover {
+  transform: scale(1.2);
+}
+
+.form__label {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1rem;
+  display: block;
+}
+
+.form__input {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.form__input:focus {
+  transition: 0.1s all;
+  border: none;
+  outline: groove #5a4ab0;
+}
+
+.form__checkbox {
+  display: inline;
 }

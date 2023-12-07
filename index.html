@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library App</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
   </head>
   <body>
     <div id="app">
@@ -16,6 +20,68 @@
         <section class="library">
           <h1 class="library__heading">Your library 📖</h1>
         </section>
+        <div class="modal hidden">
+          <div class="modal__window">
+            <header class="modal__header">
+              <span></span>
+              <h2>Add new book</h2>
+              <button class="modal__close" type="button">
+                <span class="material-symbols-outlined"> close </span>
+              </button>
+            </header>
+            <form class="form">
+              <label for="author" class="form__label">
+                Type author name*
+                <input
+                  type="text"
+                  class="form__input form__text"
+                  name="author"
+                  id="author"
+                  required
+                />
+              </label>
+              <label for="title" class="form__label">
+                Type title of book*
+                <input
+                  type="text"
+                  class="form__input form__text"
+                  name="title"
+                  id="title"
+                  required
+                />
+              </label>
+              <label for="pages" class="form__label">
+                Type number of pages*
+                <input
+                  type="number"
+                  class="form__input form__number"
+                  min="1"
+                  max="10000"
+                  name="pages"
+                  id="pages"
+                  required
+                />
+              </label>
+              <label for="isRead" class="form__label">
+                I have reed this!
+                <input
+                  type="checkbox"
+                  class="form__input form__checkbox"
+                  name="isRead"
+                  id="isRead"
+                />
+              </label>
+
+              <button
+                class="btn btn_purple modal__submit"
+                type="submit"
+                id="add-book-submit"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
       </main>
     </div>
     <script type="module" src="/main.js"></script>

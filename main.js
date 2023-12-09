@@ -3,35 +3,9 @@
 import cardMaker from "./component/bookCardMaker";
 import createButton from "./component/createButton";
 
-const myLibrary = [
-  { author: "George Orwell", title: "1984", pages: 315, isRead: true },
-  {
-    author: "J.R.R. Tolkien",
-    title: "The Lord of the Rings",
-    pages: 676,
-    isRead: true,
-  },
-  {
-    author: "Khaled Hosseini",
-    title: "The Kite Runner",
-    pages: 294,
-    isRead: false,
-  },
-  {
-    author: "J.K. Rowling",
-    title: "Harry Potter and the Philosopher's Stone",
-    pages: 432,
-    isRead: true,
-  },
-  {
-    author: "Kurt Vonnegut",
-    title: "Slaughterhouse-Five",
-    pages: 762,
-    isRead: false,
-  },
-];
+const myLibrary = [];
 
-function Book(author, title, pages, isRead) {
+function Book(title, author, pages, isRead) {
   this.author = author;
   this.title = title;
   this.pages = pages;
@@ -44,36 +18,45 @@ closeNewBookModal.addEventListener("click", () => {
   newBookModal.classList.add("hidden");
 });
 const modalForm = document.forms[0];
+
+// Submit of new book logic
 const submitNewBook = document.querySelector(".modal__submit");
 
-function addBookToTheLibrary() {
+function submitNewBookHandler(e) {
+  e.preventDefault();
+  const title = modalForm[0].value;
+  const author = modalForm[1].value;
+  const pages = modalForm[2].value;
+  const isRead = modalForm[3].checked;
+  const newBook = new Book(author, title, pages, isRead);
+  myLibrary.push(newBook);
+  console.log(myLibrary);
+  libraryEl.appendChild(cardMaker(newBook));
+  document.body.classList.remove("modal-open");
+  newBookModal.classList.add("hidden");
+}
+
+submitNewBook.addEventListener("click", (e) => submitNewBookHandler(e));
+
+function openModalForNewBook() {
   document.body.classList.add("modal-open");
   newBookModal.classList.remove("hidden");
-
-  submitNewBook.addEventListener("click", (e) => {
-    e.preventDefault();
-    const author = modalForm[0].value;
-    const title = modalForm[1].value;
-    const pages = modalForm[2].value;
-    const isRead = modalForm[3].checked;
-    const newBook = new Book(author, title, pages, isRead);
-    myLibrary.push(newBook);
-    libraryEl.appendChild(cardMaker(newBook));
-    document.body.classList.remove("modal-open");
-    newBookModal.classList.add("hidden");
-  });
 }
 
 // Add content to page
 const libraryEl = document.querySelector(".library");
+
+// {TO DO} сделать так, чтобы кнопка убиралась вверх
+
 const addBookBtn = createButton(
   `${myLibrary.length === 0 ? "btn_centred" : "btn_add"}`,
-  "Add new book",
-  addBookToTheLibrary
+  "Add new book"
 );
 addBookBtn.classList.add("btn_purple");
-
+addBookBtn.addEventListener("click", openModalForNewBook);
 libraryEl.appendChild(addBookBtn);
+
+// Checking for books
 myLibrary.forEach((element) => {
   libraryEl.appendChild(cardMaker(element));
 });

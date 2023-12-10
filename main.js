@@ -63,6 +63,8 @@ addBookBtn.addEventListener("click", openModalForNewBook);
 document.addEventListener("bookadded", () => {
   addBookBtn.classList.remove("btn_centred");
   addBookBtn.classList.add("btn_add");
+  addBookBtn.classList.add("scale-up-center");
+  setTimeout(() => addBookBtn.classList.remove("scale-up-center"), 400);
 });
 libraryEl.appendChild(addBookBtn);
 
@@ -84,5 +86,7 @@ document.addEventListener("bookremoved", (event) => {
   if (myLibrary.length === 0) {
     addBookBtn.classList.remove("btn_add");
     addBookBtn.classList.add("btn_centred");
+    addBookBtn.classList.add("scale-up-center");
+    setTimeout(() => addBookBtn.classList.remove("scale-up-center"), 400);
   }
 });

@@ -29,9 +29,16 @@ function submitNewBookHandler(e) {
   const pages = modalForm[2].value;
   const isRead = modalForm[3].checked;
   const newBook = new Book(author, title, pages, isRead);
+
+  if (myLibrary.length === 0) {
+    const addBookEvent = new CustomEvent("bookadded", {
+      detail: { bookTitle: title },
+    });
+    document.dispatchEvent(addBookEvent);
+  }
   myLibrary.push(newBook);
-  console.log(myLibrary);
   libraryEl.appendChild(cardMaker(newBook));
+
   document.body.classList.remove("modal-open");
   newBookModal.classList.add("hidden");
 }
@@ -46,14 +53,17 @@ function openModalForNewBook() {
 // Add content to page
 const libraryEl = document.querySelector(".library");
 
-// {TO DO} сделать так, чтобы кнопка убиралась вверх
-
 const addBookBtn = createButton(
   `${myLibrary.length === 0 ? "btn_centred" : "btn_add"}`,
   "Add new book"
 );
 addBookBtn.classList.add("btn_purple");
+
 addBookBtn.addEventListener("click", openModalForNewBook);
+document.addEventListener("bookadded", () => {
+  addBookBtn.classList.remove("btn_centred");
+  addBookBtn.classList.add("btn_add");
+});
 libraryEl.appendChild(addBookBtn);
 
 // Checking for books
@@ -69,7 +79,10 @@ document.addEventListener("bookremoved", (event) => {
   const index = myLibrary.findIndex((book) => book.title === removedBookTitle);
   if (index !== -1) {
     myLibrary.splice(index, 1);
-    console.log(myLibrary[index]);
-    console.log(myLibrary);
+  }
+
+  if (myLibrary.length === 0) {
+    addBookBtn.classList.remove("btn_add");
+    addBookBtn.classList.add("btn_centred");
   }
 });

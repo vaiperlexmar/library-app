@@ -22,10 +22,15 @@ function bookCardMaker(book) {
   const bookTitle = document.createElement("h2");
   const bookAuthor = document.createElement("h3");
   const bookPages = document.createElement("p");
-  const bookIsReadBtn = createButton("book__is-read-btn", "", () => {
+  const bookIsReadBtn = createButton("book__is-read-btn", "");
+  bookIsReadBtn.addEventListener("click", () => {
     book.isRead = !book.isRead;
     updateButtonAppearance(book, bookIsReadBtn);
-    console.log(`Читал нет? ${book.isRead}`);
+
+    const changeReadStatusEvent = new CustomEvent("readstatuschanged", {
+      detail: { bookId: book.id, bookIsRead: book.isRead },
+    });
+    document.dispatchEvent(changeReadStatusEvent);
   });
   const bookRemoveBtn = createButton("book__remove-btn");
 
@@ -33,10 +38,10 @@ function bookCardMaker(book) {
   bookRemoveBtn.addEventListener("click", () => {
     cardBlock.remove();
 
-    const event = new CustomEvent("bookremoved", {
-      detail: { bookTitle: book.title },
+    const removeBookEvent = new CustomEvent("bookremoved", {
+      detail: { bookId: book.id },
     });
-    document.dispatchEvent(event);
+    document.dispatchEvent(removeBookEvent);
   });
 
   // Add styling class

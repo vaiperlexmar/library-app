@@ -3,13 +3,19 @@
 import cardMaker from "./component/bookCardMaker";
 import createButton from "./component/createButton";
 
-const myLibrary = [];
+if (localStorage.getItem("library") === null) {
+  localStorage.setItem("library", JSON.stringify([]));
+}
+const myLibrary = JSON.parse(localStorage.getItem("library"));
+
+console.log(myLibrary);
 
 function Book(title, author, pages, isRead) {
   this.author = author;
   this.title = title;
   this.pages = pages;
   this.isRead = isRead;
+  this.id = Math.random().toString(16).slice(2);
 }
 
 const newBookModal = document.querySelector(".modal");
@@ -28,7 +34,7 @@ function submitNewBookHandler(e) {
   const author = modalForm[1].value;
   const pages = modalForm[2].value;
   const isRead = modalForm[3].checked;
-  const newBook = new Book(author, title, pages, isRead);
+  const newBook = new Book(title, author, pages, isRead);
 
   if (myLibrary.length === 0) {
     const addBookEvent = new CustomEvent("bookadded", {
@@ -37,6 +43,7 @@ function submitNewBookHandler(e) {
     document.dispatchEvent(addBookEvent);
   }
   myLibrary.push(newBook);
+  localStorage.setItem("library", JSON.stringify([...myLibrary]));
   libraryEl.appendChild(cardMaker(newBook));
 
   document.body.classList.remove("modal-open");
@@ -76,12 +83,18 @@ myLibrary.forEach((element) => {
 // Remove book from array
 
 document.addEventListener("bookremoved", (event) => {
-  const removedBookTitle = event.detail.bookTitle;
+  const removedBookId = event.detail.bookId;
 
-  const index = myLibrary.findIndex((book) => book.title === removedBookTitle);
+  const index = JSON.parse(localStorage.getItem("library")).findIndex(
+    (book) => book.id === removedBookId
+  );
   if (index !== -1) {
     myLibrary.splice(index, 1);
   }
+
+  localStorage.setItem("library", JSON.stringify(myLibrary));
+
+  console.log(removedBookId);
 
   if (myLibrary.length === 0) {
     addBookBtn.classList.remove("btn_add");
@@ -89,4 +102,18 @@ document.addEventListener("bookremoved", (event) => {
     addBookBtn.classList.add("scale-up-center");
     setTimeout(() => addBookBtn.classList.remove("scale-up-center"), 400);
   }
+});
+
+// Change read status
+
+document.addEventListener("readstatuschanged", (event) => {
+  const changedStatusBook = event.detail.bookId;
+  const newStatus = event.detail.bookIsRead;
+
+  const index = JSON.parse(localStorage.getItem("library")).findIndex(
+    (book) => book.id === changedStatusBook
+  );
+  myLibrary[index].isRead = newStatus;
+
+  localStorage.setItem("library", JSON.stringify(myLibrary));
 });

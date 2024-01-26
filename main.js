@@ -10,12 +10,14 @@ const myLibrary = JSON.parse(localStorage.getItem("library"));
 
 console.log(myLibrary);
 
-function Book(title, author, pages, isRead) {
-  this.author = author;
-  this.title = title;
-  this.pages = pages;
-  this.isRead = isRead;
-  this.id = Math.random().toString(16).slice(2);
+class Book {
+  constructor(title, author, pages, isRead) {
+    this.author = author;
+    this.title = title;
+    this.pages = pages;
+    this.isRead = isRead;
+    this.id = Math.random().toString(16).slice(2);
+  }
 }
 
 const newBookModal = document.querySelector(".modal");
